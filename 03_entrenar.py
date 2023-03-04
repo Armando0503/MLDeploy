@@ -24,8 +24,21 @@ def accuracy(test, pred):
 def conf_matrix(test, pred):
     return confusion_matrix(test, pred)
 
+def validation(val_name,filename='mlparams'):
+    log_model=pickle.load(open(filename, 'rb'))
+    df = pd.read_csv(val_name+'.csv')
+    X_train = pd.DataFrame()
+    X_train['age'] = df['age']
+    X_train['physical_score'] = df['physical_score']
+    y= df['test_result']
+    y_pred = log_model.predict(X_train)
+    return (y_pred,y)
 
-(yP,yL)=training('train')
+(yP,yL)=training('train_2')
+print(accuracy(yP,yL))
+print(conf_matrix(yP,yL))
+print(classification_report(yP,yL))
+(yP,yL)=validation('val')
 print(accuracy(yP,yL))
 print(conf_matrix(yP,yL))
 print(classification_report(yP,yL))

@@ -32,11 +32,11 @@ jobs:
     - name: Generar Datos
       run: |
          python 01_generar_datos.py
-         ls -l sample.csv
+         ls -l hearing_test.csv
     - name: Ingestar Datos
       run: |
          python 02_ingestar.py
-         ls -l train.csv test.csv
+         ls -l train.csv test.csv train_2.csv val.csv
     - name: Entrenar 
       run: |
          python 03_entrenar.py
